@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">City-Quest-Wroclaw</string>
+    <string name="landing_screen_button_text">Start exploring</string>
+    <string name="landing_screen_app_name">City Quest Wrocław</string>
 </resources>
