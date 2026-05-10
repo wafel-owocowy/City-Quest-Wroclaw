@@ -4,17 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.city_quest_wroclaw.R
-
-@Database(entities = [Attraction::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
+@Database(entities = [Attraction::class, Visit::class, Achievement::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun attractionDao(): AttractionDao
-
+    abstract fun VisitDao(): VisitDao
+    abstract fun AchievementDao(): AchievementDao
+    abstract fun StatisticsDao(): StatisticsDao
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
