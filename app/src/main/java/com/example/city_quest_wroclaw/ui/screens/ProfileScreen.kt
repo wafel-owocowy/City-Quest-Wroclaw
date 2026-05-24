@@ -20,8 +20,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.city_quest_wroclaw.R
 import com.example.city_quest_wroclaw.viewmodel.CityQuestViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,7 +39,7 @@ fun ProfileScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Mój Profil") },
+                title = { Text(stringResource(R.string.profile_screen_header)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -55,13 +57,13 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Statystyki",
+                text = stringResource(R.string.profile_screen_statistics),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(32.dp))
             Text(
-                text = "Odwiedzone miejsca:",
+                text = stringResource(R.string.profile_places_visited),
                 style = MaterialTheme.typography.titleLarge
             )
             Text(
@@ -74,18 +76,18 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(32.dp))
             if (visitedCount == totalCount && totalCount > 0) {
                 Text(
-                    text = "🏆 Gratulacje! Zdobyto odznakę Mistrza Wrocławia!",
+                    text = stringResource(R.string.profile_visited_all),
                     color = MaterialTheme.colorScheme.secondary,
                     style = MaterialTheme.typography.titleMedium
                 )
             } else if (visitedCount > 0) {
                 Text(
-                    text = "Odkrywaj dalej, aby zdobyć główną odznakę!",
+                    text = stringResource(R.string.profile_visited_some),
                     style = MaterialTheme.typography.bodyLarge
                 )
             } else {
                 Text(
-                    text = "Rozpocznij swoją przygodę!",
+                    text = stringResource(R.string.profile_visited_none),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }

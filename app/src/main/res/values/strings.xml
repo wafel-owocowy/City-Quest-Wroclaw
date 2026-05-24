@@ -2,4 +2,22 @@
     <string name="app_name">City-Quest-Wroclaw</string>
     <string name="landing_screen_button_text">Start exploring</string>
     <string name="landing_screen_app_name">City Quest Wrocław</string>
+    <string name="landing_screen_slogan">Explore the city. collect badges</string>
+    <string name="settings_header">Settings</string>
+    <string name="profile_screen_header">Me</string>
+    <string name="profile_screen_statistics">Stats</string>
+    <string name="profile_places_visited">Places visited:</string>
+    <string name="profile_visited_all">🏆 Congrats! You got all the badges!</string>
+    <string name="profile_visited_some">Explore more to get all the badges.</string>
+    <string name="profile_visited_none">Start your adventure!</string>
+    <string name="loading">loading…</string>
+    <string name="attraction_unvisited">Visit this place to unlock rewards!</string>
+    <string name="attraction_visited">Attraction visited! rewards unlocked.</string>
+    <string name="promo_vid">Promotional video:</string>
+    <string name="audio_guide">Audio guide</string>
+    <string name="user_marker">Your location</string>
+    <string name="collection_screen_video_available">🎥 Video available</string>
+    <string name="collection_screen_audio_available">🎧 Audio available</string>
+    <string name="collection_screen_empty">Your collection is empty</string>
+    <string name="collection_screen_topbar">Rewards collection</string>
 </resources>

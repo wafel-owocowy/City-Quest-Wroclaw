@@ -24,9 +24,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.city_quest_wroclaw.R
 
 @Composable
 fun StartScreen(onStartClick: () -> Unit) {
@@ -55,7 +57,7 @@ fun StartScreen(onStartClick: () -> Unit) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "CityQuest Wrocław",
+                text = stringResource(R.string.landing_screen_app_name),
                 color = Color.White,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
@@ -63,7 +65,7 @@ fun StartScreen(onStartClick: () -> Unit) {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Odkrywaj miasto, zdobywaj odznaki!",
+                text =  stringResource(R.string.landing_screen_slogan),
                 color = Color.White.copy(alpha = 0.8f),
                 fontSize = 18.sp,
                 style = MaterialTheme.typography.bodyLarge
@@ -78,7 +80,7 @@ fun StartScreen(onStartClick: () -> Unit) {
                     }
                     .padding(horizontal = 32.dp, vertical = 16.dp)
             ) {
-                Text("Start", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text( stringResource(R.string.landing_screen_button_text), fontSize = 24.sp, fontWeight = FontWeight.Bold)
             }
         }
     }

@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -49,7 +50,7 @@ fun ObjectDetailsScreen(
     val attraction = attractions.find { it.id == attractionId }
 
     if (attraction == null) {
-        Text("Ładowanie...")
+        Text(stringResource(R.string.loading))
         return
     }
 
@@ -98,27 +99,27 @@ fun ObjectDetailsScreen(
 
             if (!attraction.isVisited) {
                 Text(
-                    text = "Odwiedź to miejsce, aby odblokować nagrody!",
+                    text = stringResource(R.string.attraction_unvisited),
                     color = MaterialTheme.colorScheme.error,
                     fontWeight = FontWeight.Bold
                 )
             } else {
                 Text(
-                    text = "Miejsce odwiedzone! Nagrody odblokowane.",
+                    text = stringResource(R.string.attraction_visited),
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
 
                 if (attraction.hasVideo) {
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("Wideo Promocyjne", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.promo_vid), style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.height(8.dp))
                     VideoPlayer(context, R.raw.promo_video)
                 }
 
                 if (attraction.hasAudio) {
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("Przewodnik Audio", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.audio_guide), style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.height(8.dp))
                     AudioPlayer(context, R.raw.guide_audio)
                 }

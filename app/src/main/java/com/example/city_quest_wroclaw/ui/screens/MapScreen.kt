@@ -13,10 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.example.city_quest_wroclaw.R
 import com.example.city_quest_wroclaw.viewmodel.CityQuestViewModel
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -63,7 +65,7 @@ fun MapScreen(
             mapView.onDetach()
         }
     }
-
+    val user_marker_title = stringResource(R.string.user_marker)
     LaunchedEffect(attractions, currentLocation) {
         mapView.overlays.clear()
 
@@ -84,7 +86,7 @@ fun MapScreen(
         currentLocation?.let { loc ->
             val userMarker = Marker(mapView)
             userMarker.position = GeoPoint(loc.latitude, loc.longitude)
-            userMarker.title = "Twoja lokalizacja"
+            userMarker.title = user_marker_title
             mapView.overlays.add(userMarker)
             
             if (!isMapCenteredOnUser) {

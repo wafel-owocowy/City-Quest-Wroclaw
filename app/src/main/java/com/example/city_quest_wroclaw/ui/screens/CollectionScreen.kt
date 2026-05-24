@@ -20,8 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.city_quest_wroclaw.R
 import com.example.city_quest_wroclaw.viewmodel.CityQuestViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +38,7 @@ fun CollectionScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Kolekcja Nagród") },
+                title = { Text(stringResource(R.string.collection_screen_topbar)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -53,7 +55,7 @@ fun CollectionScreen(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "Twoja kolekcja jest pusta. Odwiedź atrakcje, aby odblokować nagrania audio i wideo!",
+                    text = stringResource(R.string.collection_screen_empty),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }
@@ -76,10 +78,10 @@ fun CollectionScreen(
                                 style = MaterialTheme.typography.titleMedium
                             )
                             if (item.hasVideo) {
-                                Text("🎥 Wideo dostępne", color = MaterialTheme.colorScheme.primary)
+                                Text(stringResource(R.string.collection_screen_video_available), color = MaterialTheme.colorScheme.primary)
                             }
                             if (item.hasAudio) {
-                                Text("🎧 Audio dostępne", color = MaterialTheme.colorScheme.primary)
+                                Text(stringResource(R.string.collection_screen_audio_available), color = MaterialTheme.colorScheme.primary)
                             }
                         }
                     }
