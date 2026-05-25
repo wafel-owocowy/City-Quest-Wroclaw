@@ -20,4 +20,8 @@
     <string name="collection_screen_audio_available">🎧 Audio available</string>
     <string name="collection_screen_empty">Your collection is empty</string>
     <string name="collection_screen_topbar">Rewards collection</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_collections">Collections</string>
+    <string name="nav_settings">Settings</string>
 </resources>

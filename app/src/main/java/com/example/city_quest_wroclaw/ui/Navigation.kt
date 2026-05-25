@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -23,6 +24,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
+import com.example.city_quest_wroclaw.R
+import com.example.city_quest_wroclaw.ui.BottomNavItem
 import com.example.city_quest_wroclaw.ui.screens.CollectionScreen
 import com.example.city_quest_wroclaw.ui.screens.MapScreen
 import com.example.city_quest_wroclaw.ui.screens.ObjectDetailsScreen
@@ -42,20 +45,17 @@ sealed class Screen(val route: String) {
     object Settings : Screen("settings_screen")
 }
 
-sealed class BottomNavItem(val screen: Screen, val title: String, val icon: ImageVector) {
-    object Map : BottomNavItem(Screen.Map, "Map", Icons.Default.LocationOn)
-    object Profile : BottomNavItem(Screen.Profile, "Profile", Icons.Default.Person)
-    object Collection : BottomNavItem(Screen.Collection, "Collections", Icons.AutoMirrored.Filled.List)
-    object Settings : BottomNavItem(Screen.Settings, "Settings", Icons.Default.Settings)
+class BottomNavItem(val screen: Screen, val title: String, val icon: ImageVector) {
+
 }
 
 @Composable
 fun Navigation(navController: NavHostController, viewModel: CityQuestViewModel) {
     val items = listOf(
-        BottomNavItem.Map,
-        BottomNavItem.Profile,
-        BottomNavItem.Collection,
-        BottomNavItem.Settings
+        BottomNavItem(Screen.Map, stringResource(R.string.nav_map), Icons.Default.LocationOn),
+        BottomNavItem(Screen.Profile, stringResource(R.string.nav_map), Icons.Default.Person),
+        BottomNavItem(Screen.Collection, stringResource(R.string.nav_collections), Icons.AutoMirrored.Filled.List),
+        BottomNavItem(Screen.Settings, stringResource(R.string.nav_settings), Icons.Default.Settings)
     )
     
     val navBackStackEntry by navController.currentBackStackEntryAsState()

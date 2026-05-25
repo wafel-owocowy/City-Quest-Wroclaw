@@ -21,4 +21,7 @@
     <string name="collection_screen_audio_available">🎧 Audio dostępne</string>
     <string name="collection_screen_empty">Twoja kolekcja jest pusta. Odwiedź atrakcje, aby odblokować nagrania audio i wideo!</string>
     <string name="collection_screen_topbar">Kolekcja Nagród</string>
+    <string name="nav_map">Mapa</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_collections">Kolekcja</string>
 </resources>
