@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.navigation.compose)
+    implementation(libs.androidx.appcompat)
     ksp(libs.androidx.room.compiler)
     
     implementation(libs.osmdroid.android)
