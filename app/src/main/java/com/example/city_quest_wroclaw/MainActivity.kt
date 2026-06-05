@@ -6,17 +6,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
+import androidx.preference.PreferenceManager
 import com.example.city_quest_wroclaw.ui.Navigation
 import com.example.city_quest_wroclaw.ui.theme.CityQuestWroclawTheme
 import com.example.city_quest_wroclaw.viewmodel.CityQuestViewModel
 
 class MainActivity : ComponentActivity() {
-
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
     private val viewModel: CityQuestViewModel by viewModels()
 
     private val locationPermissionRequest = registerForActivityResult(
@@ -43,7 +46,9 @@ class MainActivity : ComponentActivity() {
         )
 
         setContent {
-            CityQuestWroclawTheme {
+            CityQuestWroclawTheme(darkTheme = sharedPreferences.getBoolean("dark_mode",
+                isSystemInDarkTheme()
+            )) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
