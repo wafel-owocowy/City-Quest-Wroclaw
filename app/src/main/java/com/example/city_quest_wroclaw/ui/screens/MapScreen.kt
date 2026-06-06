@@ -1,6 +1,7 @@
 package com.example.city_quest_wroclaw.ui.screens
 
 import android.content.Context
+import androidx.core.content.ContextCompat
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -74,6 +75,15 @@ fun MapScreen(
             val marker = Marker(mapView)
             marker.position = GeoPoint(attraction.latitude, attraction.longitude)
             marker.title = attraction.name
+            
+            val iconRes = if (attraction.isVisited) {
+                R.drawable.ic_attraction_visited
+            } else {
+                R.drawable.ic_attraction_unvisited
+            }
+            marker.icon = ContextCompat.getDrawable(context, iconRes)
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+
             marker.setOnMarkerClickListener { _, _ ->
                 onAttractionClick(attraction.id)
                 true
@@ -87,6 +97,10 @@ fun MapScreen(
             val userMarker = Marker(mapView)
             userMarker.position = GeoPoint(loc.latitude, loc.longitude)
             userMarker.title = user_marker_title
+            
+            userMarker.icon = ContextCompat.getDrawable(context, R.drawable.ic_user_location)
+            userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+            
             mapView.overlays.add(userMarker)
             
             if (!isMapCenteredOnUser) {

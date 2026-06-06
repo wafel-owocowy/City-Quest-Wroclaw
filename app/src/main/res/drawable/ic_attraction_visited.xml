@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
+  <!-- Marker Pin Shadow -->
+  <path
+      android:fillColor="#20000000"
+      android:pathData="M18,34c2,0 5,-1.5 5,-3s-3,-2 -5,-2s-5,0.5 -5,2s3,3 5,3z"/>
+  <!-- Marker Pin Body (Elegant Teal/Green) -->
+  <path
+      android:fillColor="#4CAF50"
+      android:pathData="M18,2C11.37,2 6,7.37 6,14c0,9 12,20 12,20s12,-11 12,-20c0,-6.63 -5.37,-12 -12,-12z"/>
+  <!-- Inner White Circle -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M18,14m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"/>
+  <!-- Checkmark symbol in the middle -->
+  <path
+      android:fillColor="#2E7D32"
+      android:pathData="M16.5,17.2l-2.2,-2.2l-1.1,1.1l3.3,3.3l7,-7l-1.1,-1.1z"/>
+</vector>

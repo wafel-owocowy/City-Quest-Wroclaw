@@ -19,7 +19,7 @@ import com.example.city_quest_wroclaw.ui.theme.CityQuestWroclawTheme
 import com.example.city_quest_wroclaw.viewmodel.CityQuestViewModel
 
 class MainActivity : ComponentActivity() {
-    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(this) }
     private val viewModel: CityQuestViewModel by viewModels()
 
     private val locationPermissionRequest = registerForActivityResult(

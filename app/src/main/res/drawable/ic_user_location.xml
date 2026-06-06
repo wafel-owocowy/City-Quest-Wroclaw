@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="40"
+    android:viewportHeight="40">
+  <!-- Outer soft glow circle -->
+  <path
+      android:fillColor="#332196F3"
+      android:pathData="M20,20m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0"/>
+  <!-- Medium intensity glow circle -->
+  <path
+      android:fillColor="#662196F3"
+      android:pathData="M20,20m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"/>
+  <!-- Solid white border circle -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M20,20m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0"/>
+  <!-- Solid core blue circle -->
+  <path
+      android:fillColor="#1976D2"
+      android:pathData="M20,20m-4.5,0a4.5,4.5 0,1 1,9 0a4.5,4.5 0,1 1,-9 0"/>
+</vector>

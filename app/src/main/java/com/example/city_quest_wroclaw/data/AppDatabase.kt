@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.city_quest_wroclaw.R
 @TypeConverters(Converters::class)
-@Database(entities = [Attraction::class, Visit::class, Achievement::class], version = 1, exportSchema = false)
+@Database(entities = [Attraction::class, Visit::class, Achievement::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun attractionDao(): AttractionDao
@@ -30,6 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                     "city_quest_database"
                 )
                     .addCallback(AppDatabaseCallback())
+                    .fallbackToDestructiveMigration(dropAllTables = true)
                     .build()
                 INSTANCE = instance
                 instance
@@ -43,6 +44,35 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 CoroutineScope(Dispatchers.IO).launch {
                     populateDatabase(database.attractionDao())
+                }
+            }
+        }
+
+        override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
+            super.onDestructiveMigration(db)
+            INSTANCE?.let { database ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    populateDatabase(database.attractionDao())
+                }
+            }
+        }
+
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val cursor = db.query("SELECT COUNT(*) FROM attractions")
+                        if (cursor.moveToFirst()) {
+                            val count = cursor.getInt(0)
+                            if (count == 0) {
+                                populateDatabase(database.attractionDao())
+                            }
+                        }
+                        cursor.close()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
             }
         }
