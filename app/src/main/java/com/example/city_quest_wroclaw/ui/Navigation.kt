@@ -135,7 +135,7 @@ fun Navigation(navController: NavHostController, viewModel: CityQuestViewModel) 
                 )
             }
             composable(Screen.Settings.route) {
-                SettingsScreen()
+                SettingsScreen(viewModel = viewModel)
             }
         }
     }

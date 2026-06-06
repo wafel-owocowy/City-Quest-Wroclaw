@@ -73,11 +73,7 @@ fun ObjectDetailsScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp)
         ) {
-            val imageName = attraction.name.lowercase().replace(" ", "_").replace("ł", "l").replace("ó", "o").replace("ś", "s").replace("ź", "z").replace("ż", "z").replace("ń", "n").replace("ć", "c").replace("ą", "a").replace("ę", "e")
-            val imageResId = remember(imageName) {
-                val resId = context.resources.getIdentifier(imageName, "drawable", context.packageName)
-                if (resId != 0) resId else R.drawable.attraction_1 // fallback to generic placeholder
-            }
+            val imageResId = attraction.imageResId
 
             Image(
                 painter = painterResource(id = imageResId),

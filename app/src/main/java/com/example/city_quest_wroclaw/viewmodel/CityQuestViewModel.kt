@@ -1,6 +1,7 @@
 package com.example.city_quest_wroclaw.viewmodel
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import android.location.Location
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,6 +20,22 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
     private val db = AppDatabase.getDatabase(application)
     private val attractionDao = db.attractionDao()
     private val locationService = LocationService(application)
+    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
+
+    // Theme State Persistence (StateFlow to reactively update Compose UI)
+    private val _isDarkMode = MutableStateFlow<Boolean?>(
+        if (sharedPreferences.contains("dark_mode")) {
+            sharedPreferences.getBoolean("dark_mode", false)
+        } else {
+            null // system default
+        }
+    )
+    val isDarkMode: StateFlow<Boolean?> = _isDarkMode.asStateFlow()
+
+    fun setDarkMode(enabled: Boolean) {
+        _isDarkMode.value = enabled
+        sharedPreferences.edit().putBoolean("dark_mode", enabled).apply()
+    }
 
     val attractions: StateFlow<List<Attraction>> = attractionDao.getAllAttractions()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())

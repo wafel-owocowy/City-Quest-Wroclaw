@@ -25,6 +25,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="auto_locale"
+                android:value="true" />
+        </service>
     </application>
 
 </manifest>
