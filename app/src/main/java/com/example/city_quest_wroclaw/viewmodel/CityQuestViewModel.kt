@@ -26,6 +26,27 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
     private val _currentLocation = MutableStateFlow<Location?>(null)
     val currentLocation: StateFlow<Location?> = _currentLocation.asStateFlow()
 
+    // Map State Persistence
+    var lastMapCenterLat: Double? = null
+    var lastMapCenterLon: Double? = null
+    var lastMapZoom: Double = 15.0
+    var shouldCenterOnUser: Boolean = true
+        private set
+
+    fun saveMapState(lat: Double, lon: Double, zoom: Double) {
+        lastMapCenterLat = lat
+        lastMapCenterLon = lon
+        lastMapZoom = zoom
+    }
+
+    fun resetMapCentering() {
+        shouldCenterOnUser = true
+    }
+
+    fun markMapCentered() {
+        shouldCenterOnUser = false
+    }
+
     fun startLocationUpdates() {
         viewModelScope.launch {
             locationService.getLocationFlow().collect { location ->

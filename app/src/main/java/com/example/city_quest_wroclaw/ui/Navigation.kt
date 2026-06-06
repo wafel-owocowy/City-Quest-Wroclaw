@@ -74,6 +74,9 @@ fun Navigation(navController: NavHostController, viewModel: CityQuestViewModel) 
                             label = { Text(item.title) },
                             selected = currentDestination?.hierarchy?.any { it.route == item.screen.route } == true,
                             onClick = {
+                                if (item.screen.route == Screen.Map.route) {
+                                    viewModel.resetMapCentering()
+                                }
                                 navController.navigate(item.screen.route) {
                                     popUpTo(navController.graph.findStartDestination().id) {
                                         saveState = true

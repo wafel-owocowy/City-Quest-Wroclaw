@@ -26,4 +26,5 @@
     <string name="nav_collections">Kolekcja</string>
     <string name="nav_settings">Ustawienia</string>
     <string name="settings_dark_mode">Ciemny motyw</string>
+    <string name="center_on_user">Centruj na użytkowniku</string>
 </resources>

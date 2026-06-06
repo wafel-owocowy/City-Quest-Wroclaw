@@ -4,6 +4,14 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MyLocation
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -38,8 +46,6 @@ fun MapScreen(
     val attractions by viewModel.attractions.collectAsState()
     val currentLocation by viewModel.currentLocation.collectAsState()
 
-    var isMapCenteredOnUser by remember { mutableStateOf(false) }
-
     val mapView = remember {
         Configuration.getInstance().load(context, context.getSharedPreferences("osmdroid", Context.MODE_PRIVATE))
         Configuration.getInstance().userAgentValue = context.packageName
@@ -47,8 +53,36 @@ fun MapScreen(
         MapView(context).apply {
             setTileSource(TileSourceFactory.MAPNIK)
             setMultiTouchControls(true)
-            controller.setZoom(15.0)
-            controller.setCenter(GeoPoint(51.107885, 17.038538)) // Wroclaw center
+            
+            // Restore saved map state or default to Wroclaw
+            val savedLat = viewModel.lastMapCenterLat
+            val savedLon = viewModel.lastMapCenterLon
+            if (savedLat != null && savedLon != null) {
+                controller.setZoom(viewModel.lastMapZoom)
+                controller.setCenter(GeoPoint(savedLat, savedLon))
+            } else {
+                controller.setZoom(15.0)
+                controller.setCenter(GeoPoint(51.107885, 17.038538)) // Wroclaw center
+            }
+            
+            // Save map state when user drags or zooms
+            addMapListener(object : org.osmdroid.events.MapListener {
+                override fun onScroll(event: org.osmdroid.events.ScrollEvent?): Boolean {
+                    event?.source?.let { map ->
+                        val center = map.mapCenter
+                        viewModel.saveMapState(center.latitude, center.longitude, map.zoomLevelDouble)
+                    }
+                    return true
+                }
+
+                override fun onZoom(event: org.osmdroid.events.ZoomEvent?): Boolean {
+                    event?.source?.let { map ->
+                        val center = map.mapCenter
+                        viewModel.saveMapState(center.latitude, center.longitude, map.zoomLevelDouble)
+                    }
+                    return true
+                }
+            })
         }
     }
 
@@ -103,9 +137,10 @@ fun MapScreen(
             
             mapView.overlays.add(userMarker)
             
-            if (!isMapCenteredOnUser) {
+            if (viewModel.shouldCenterOnUser) {
                 mapView.controller.animateTo(userMarker.position)
-                isMapCenteredOnUser = true
+                viewModel.saveMapState(loc.latitude, loc.longitude, mapView.zoomLevelDouble)
+                viewModel.markMapCentered()
             }
         }
         mapView.invalidate()
@@ -116,5 +151,27 @@ fun MapScreen(
             factory = { mapView },
             modifier = Modifier.fillMaxSize()
         )
+        
+        // Floating action button to center map on user
+        FloatingActionButton(
+            onClick = {
+                currentLocation?.let { loc ->
+                    val userPoint = GeoPoint(loc.latitude, loc.longitude)
+                    mapView.controller.animateTo(userPoint)
+                    viewModel.saveMapState(userPoint.latitude, userPoint.longitude, mapView.zoomLevelDouble)
+                    viewModel.markMapCentered()
+                }
+            },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp),
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+        ) {
+            Icon(
+                imageVector = Icons.Default.MyLocation,
+                contentDescription = stringResource(R.string.center_on_user)
+            )
+        }
     }
 }
