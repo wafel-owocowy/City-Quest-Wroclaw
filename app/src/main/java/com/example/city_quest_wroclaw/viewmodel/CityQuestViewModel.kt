@@ -14,8 +14,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Job
 
 class CityQuestViewModel(application: Application) : AndroidViewModel(application) {
+
+    companion object {
+        // PROMIEŃ ZALICZENIA ATRAKCJI (W METRACH) - ZMIEŃ TĘ WARTOŚĆ DLA TESTÓW
+        const val VISIT_RADIUS_METERS = 1000.0
+    }
 
     private val db = AppDatabase.getDatabase(application)
     private val attractionDao = db.attractionDao()
@@ -64,8 +70,11 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
         shouldCenterOnUser = false
     }
 
+    private var locationJob: Job? = null
+
     fun startLocationUpdates() {
-        viewModelScope.launch {
+        if (locationJob?.isActive == true) return
+        locationJob = viewModelScope.launch {
             locationService.getLocationFlow().collect { location ->
                 _currentLocation.value = location
                 checkDistanceToAttractions(location)
@@ -84,7 +93,7 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
                     results
                 )
                 val distanceInMeters = results[0]
-                if (distanceInMeters <= 50) {
+                if (distanceInMeters <= VISIT_RADIUS_METERS) {
                     markAsVisited(attraction.id)
                 }
             }
