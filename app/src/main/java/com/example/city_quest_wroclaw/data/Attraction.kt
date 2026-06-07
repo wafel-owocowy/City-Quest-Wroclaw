@@ -13,6 +13,6 @@ data class Attraction(
     val longitude: Double,
     val isVisited: Boolean = false,
     val imageResId: Int, // e.g. R.drawable.attraction_1
-    val hasAudio: Boolean = false,
-    val hasVideo: Boolean = false
+    val audioResId: Int? = null,
+    val videoResId: Int? = null
 )

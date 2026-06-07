@@ -33,7 +33,7 @@ fun CollectionScreen(
     onBackClick: () -> Unit
 ) {
     val attractions by viewModel.attractions.collectAsState()
-    val unlockedItems = attractions.filter { it.isVisited && (it.hasAudio || it.hasVideo) }
+    val unlockedItems = attractions.filter { it.isVisited && (it.audioResId != null || it.videoResId != null) }
 
     Scaffold(
         topBar = {
@@ -77,10 +77,10 @@ fun CollectionScreen(
                                 fontWeight = FontWeight.Bold,
                                 style = MaterialTheme.typography.titleMedium
                             )
-                            if (item.hasVideo) {
+                            if (item.videoResId != null) {
                                 Text(stringResource(R.string.collection_screen_video_available), color = MaterialTheme.colorScheme.primary)
                             }
-                            if (item.hasAudio) {
+                            if (item.audioResId != null) {
                                 Text(stringResource(R.string.collection_screen_audio_available), color = MaterialTheme.colorScheme.primary)
                             }
                         }

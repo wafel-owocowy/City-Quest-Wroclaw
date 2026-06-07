@@ -106,18 +106,18 @@ fun ObjectDetailsScreen(
                     fontWeight = FontWeight.Bold
                 )
 
-                if (attraction.hasVideo) {
+                attraction.videoResId?.let { videoRes ->
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(stringResource(R.string.promo_vid), style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.height(8.dp))
-                    VideoPlayer(context, R.raw.promo_video)
+                    VideoPlayer(context, videoRes)
                 }
 
-                if (attraction.hasAudio) {
+                attraction.audioResId?.let { audioRes ->
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(stringResource(R.string.audio_guide), style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.height(8.dp))
-                    AudioPlayer(context, R.raw.guide_audio)
+                    AudioPlayer(context, audioRes)
                 }
             }
         }

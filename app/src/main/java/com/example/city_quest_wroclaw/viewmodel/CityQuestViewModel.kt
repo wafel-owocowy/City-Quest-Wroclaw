@@ -20,7 +20,7 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
 
     companion object {
         // PROMIEŃ ZALICZENIA ATRAKCJI (W METRACH) - ZMIEŃ TĘ WARTOŚĆ DLA TESTÓW
-        const val VISIT_RADIUS_METERS = 1000.0
+        const val VISIT_RADIUS_METERS = 10000.0
     }
 
     private val db = AppDatabase.getDatabase(application)

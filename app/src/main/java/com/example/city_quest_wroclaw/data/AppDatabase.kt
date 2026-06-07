@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.city_quest_wroclaw.R
 @TypeConverters(Converters::class)
-@Database(entities = [Attraction::class, Visit::class, Achievement::class], version = 2, exportSchema = false)
+@Database(entities = [Attraction::class, Visit::class, Achievement::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun attractionDao(): AttractionDao
@@ -85,7 +85,8 @@ abstract class AppDatabase : RoomDatabase() {
                     latitude = 51.1093,
                     longitude = 17.0326,
                     imageResId = R.drawable.attraction_1,
-                    hasAudio = true
+                    audioResId = R.raw.guide_audio,
+                    videoResId = R.raw.rynek_video
                 ),
                 Attraction(
                     name = "Hala Stulecia",
@@ -93,7 +94,7 @@ abstract class AppDatabase : RoomDatabase() {
                     latitude = 51.1069,
                     longitude = 17.0772,
                     imageResId = R.drawable.attraction_2,
-                    hasVideo = true
+                    videoResId = R.raw.hala_stulecia_video
                 ),
                 Attraction(
                     name = "Ostrów Tumski",
@@ -101,14 +102,15 @@ abstract class AppDatabase : RoomDatabase() {
                     latitude = 51.1141,
                     longitude = 17.0461,
                     imageResId = R.drawable.attraction_3,
-                    hasAudio = true
+                    audioResId = R.raw.guide_audio
                 ),
                 Attraction(
                     name = "Panorama Racławicka",
                     description = "Wielkie malowidło przedstawiające bitwę pod Racławicami.",
                     latitude = 51.1101,
                     longitude = 17.0444,
-                    imageResId = R.drawable.attraction_4
+                    imageResId = R.drawable.attraction_4,
+                    audioResId = R.raw.panorama_raclawicka_audio
                 ),
                 Attraction(
                     name = "ZOO Wrocław",
