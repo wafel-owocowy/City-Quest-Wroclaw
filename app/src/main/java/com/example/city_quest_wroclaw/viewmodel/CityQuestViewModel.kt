@@ -15,13 +15,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Job
+import androidx.core.content.edit
 
 class CityQuestViewModel(application: Application) : AndroidViewModel(application) {
-
-    companion object {
-        // PROMIEŃ ZALICZENIA ATRAKCJI (W METRACH) - ZMIEŃ TĘ WARTOŚĆ DLA TESTÓW
-        const val VISIT_RADIUS_METERS = 10000.0
-    }
 
     private val db = AppDatabase.getDatabase(application)
     private val attractionDao = db.attractionDao()
@@ -40,9 +36,21 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun setDarkMode(enabled: Boolean) {
         _isDarkMode.value = enabled
-        sharedPreferences.edit().putBoolean("dark_mode", enabled).apply()
+        sharedPreferences.edit { putBoolean("dark_mode", enabled) }
     }
+    private val _visitRadiusMeters = MutableStateFlow<Float>(
+        if (sharedPreferences.contains("visit_radius")) {
+            sharedPreferences.getFloat("visit_radius", 50f)
+        } else {
+            50f // system default
+        }
+    )
+    val visitRadiusMeters: StateFlow<Float> = _visitRadiusMeters.asStateFlow()
 
+    fun setRadiusMeters(newRadius: Float) {
+        _visitRadiusMeters.value = newRadius
+        sharedPreferences.edit { putFloat("visit_radius", newRadius) }
+    }
     val attractions: StateFlow<List<Attraction>> = attractionDao.getAllAttractions()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
@@ -84,6 +92,7 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
 
     private fun checkDistanceToAttractions(userLocation: Location) {
         val currentAttractions = attractions.value
+        val distance = visitRadiusMeters.value
         currentAttractions.forEach { attraction ->
             if (!attraction.isVisited) {
                 val results = FloatArray(1)
@@ -93,7 +102,7 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
                     results
                 )
                 val distanceInMeters = results[0]
-                if (distanceInMeters <= VISIT_RADIUS_METERS) {
+                if (distanceInMeters <= distance) {
                     markAsVisited(attraction.id)
                 }
             }

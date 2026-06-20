@@ -11,7 +11,7 @@
     <string name="profile_visited_all">🏆 Gratulacje! Zdobyto odznakę Mistrza Wrocławia!</string>
     <string name="profile_visited_some">Odkrywaj dalej, aby zdobyć główną odznakę!</string>
     <string name="profile_visited_none">Rozpocznij swoją przygodę!</string>
-    <string name="loading">Ładowanie...</string>
+    <string name="loading">Ładowanie…</string>
     <string name="attraction_unvisited">Odwiedź to miejsce, aby odblokować nagrody!</string>
     <string name="attraction_visited">Miejsce odwiedzone! Nagrody odblokowane.</string>
     <string name="promo_vid">Wideo Promocyjne</string>
@@ -26,6 +26,8 @@
     <string name="nav_collections">Kolekcja</string>
     <string name="nav_settings">Ustawienia</string>
     <string name="settings_dark_mode">Ciemny motyw</string>
+    <string name="settings_username">Nazwa użytkownika</string>
     <string name="center_on_user">Centruj na użytkowniku</string>
     <string name="settings_language">Język</string>
+    <string name="settings_visit_radius">Obszar wykrycia miejsca</string>
 </resources>

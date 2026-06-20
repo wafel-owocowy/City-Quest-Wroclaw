@@ -16,6 +16,7 @@ import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +37,7 @@ import java.util.Locale
 fun SettingsScreen(viewModel: CityQuestViewModel) {
     val isDarkModeState by viewModel.isDarkMode.collectAsState()
     val isDarkMode = isDarkModeState ?: isSystemInDarkTheme()
-
+    val visitRadius by viewModel.visitRadiusMeters.collectAsState()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -80,6 +81,26 @@ fun SettingsScreen(viewModel: CityQuestViewModel) {
                         viewModel.setDarkMode(isChecked)
                     }
                 )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(R.string.settings_visit_radius),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                Spacer(Modifier.weight(1f))
+                Column {Slider(
+                    value = visitRadius,
+                    onValueChange = { newVal -> viewModel.setRadiusMeters(newVal) },
+                    steps = 18,
+                    valueRange = 10f..200f
+                )
+                    Text(text = "$visitRadius m") }
+
             }
             
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
