@@ -1,7 +1,7 @@
 Opis aplikacji: [Opis aplikacji-1.pdf](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/Opis%20aplikacji-1.pdf)
 
 ## Diagram ekranów aplikacji: 
-![diagram.drawio.pdf](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/diagram.drawio.pdf)
+![diagram_drawio.png](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/diagram_drawio.pdf)
 
 ## Struktura bazy danych: 
 ![database-structure.png](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/database-structure.png)
@@ -53,3 +53,5 @@ Opis aplikacji: [Opis aplikacji-1.pdf](https://github.com/wafel-owocowy/City-Que
     fun setRadiusMeters(newRadius: Float)
     fun setDarkMode(enabled: Boolean)
     ```
+## Przepływy danych
+![dataflow.png](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/dataflow.png)
