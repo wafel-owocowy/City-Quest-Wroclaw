@@ -1,12 +1,12 @@
 Opis aplikacji: [Opis aplikacji-1.pdf](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/Opis%20aplikacji-1.pdf)
 
-Diagram ekranów aplikacji: [diagram.drawio.pdf](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/diagram.drawio.pdf)
+## Diagram ekranów aplikacji: [diagram.drawio.pdf](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/diagram.drawio.pdf)
 
-Struktura bazy danych: [database-structure.png](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/database-structure.png)
+## Struktura bazy danych: [database-structure.png](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/database-structure.png)
 
-Opis logiki biznesowej w Viewmodel
+## Opis logiki biznesowej w Viewmodel
 
-Cała logika aplikacji zawiera się w klasie CityQuestViewModel obsługującej:
+### Cała logika aplikacji zawiera się w klasie CityQuestViewModel obsługującej:
 1. Bazę danych w tym:
     1. zarządzanie połączeniem z bazą
         ```
@@ -36,18 +36,18 @@ Cała logika aplikacji zawiera się w klasie CityQuestViewModel obsługującej:
         private fun checkDistanceToAttractions(userLocation: Location)
         ```
 3. Utrzymanie stanu UI mapy:
-        ```
-        var lastMapCenterLat: Double? 
-        var lastMapCenterLon: Double? 
-        var lastMapZoom: Double
-        var shouldCenterOnUser: Boolean
-        fun saveMapState(lat: Double, lon: Double, zoom: Double)
-        fun resetMapCentering()
-        fun markMapCentered()
-        ```
+    ```
+    var lastMapCenterLat: Double? 
+    var lastMapCenterLon: Double? 
+    var lastMapZoom: Double
+    var shouldCenterOnUser: Boolean
+    fun saveMapState(lat: Double, lon: Double, zoom: Double)
+    fun resetMapCentering()
+    fun markMapCentered()
+    ```
 4. Udostępnianie funkcji zmieniania ustawień:
-        ```
-        fun setLanguage(languageTag: String)
-        fun setRadiusMeters(newRadius: Float)
-        fun setDarkMode(enabled: Boolean)
-        ```
+    ```
+    fun setLanguage(languageTag: String)
+    fun setRadiusMeters(newRadius: Float)
+    fun setDarkMode(enabled: Boolean)
+    ```
