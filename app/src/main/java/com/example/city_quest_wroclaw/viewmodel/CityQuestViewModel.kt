@@ -3,6 +3,7 @@ package com.example.city_quest_wroclaw.viewmodel
 import android.app.Application
 import androidx.preference.PreferenceManager
 import android.location.Location
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.city_quest_wroclaw.data.AppDatabase
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Job
 import androidx.core.content.edit
+import androidx.core.os.LocaleListCompat
 
 class CityQuestViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -113,5 +115,10 @@ class CityQuestViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             attractionDao.updateVisitedStatus(id, true)
         }
+    }
+
+    fun setLanguage(languageTag: String){
+        val localeList = LocaleListCompat.forLanguageTags(languageTag)
+        AppCompatDelegate.setApplicationLocales(localeList)
     }
 }

@@ -28,7 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.os.LocaleListCompat
 import com.example.city_quest_wroclaw.R
 import com.example.city_quest_wroclaw.viewmodel.CityQuestViewModel
 import java.util.Locale
@@ -125,16 +124,14 @@ fun SettingsScreen(viewModel: CityQuestViewModel) {
                         label = "EN",
                         isSelected = currentLocaleCode == "en",
                         onClick = {
-                            val localeList = LocaleListCompat.forLanguageTags("en")
-                            AppCompatDelegate.setApplicationLocales(localeList)
+                            viewModel.setLanguage("en")
                         }
                     )
                     LanguageButton(
                         label = "PL",
                         isSelected = currentLocaleCode == "pl",
                         onClick = {
-                            val localeList = LocaleListCompat.forLanguageTags("pl")
-                            AppCompatDelegate.setApplicationLocales(localeList)
+                            viewModel.setLanguage("pl")
                         }
                     )
                 }
