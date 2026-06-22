@@ -1,4 +1,7 @@
-Opis aplikacji: [Opis aplikacji-1.pdf](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/Opis%20aplikacji-1.pdf)
+# CityQuest Wrocław
+## Opis aplikacji: 
+Aplikacja mają na celu uczynić z zwiedzania Wrocławia grę, reklamująca najważniejsze atrakcje miasta, oraz nagradzająca ich odwiedzanie. Projekt stworzony w ramach zajęć z kusru Aplikacje Mobilne
+[Opis aplikacji-1.pdf](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/Opis%20aplikacji-1.pdf)
 
 ## Diagram ekranów i przejść aplikacji: 
 ![diagram_drawio.png](https://github.com/wafel-owocowy/City-Quest-Wroclaw/blob/master/diagram_drawio.png)
